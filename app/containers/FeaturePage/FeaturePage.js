@@ -4,7 +4,7 @@
  * List all the features
  */
 import React from 'react';
-import {Helmet} from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import './style.scss';
 
 const FeaturePage = () => (
@@ -38,7 +38,7 @@ const FeaturePage = () => (
                 <p className="title">Industry-standard routing</p>
                 <p>
                     {
-                        "Write composable CSS that's co-located with your components for complete modularity. Unique generated class names keep the specificity low while eliminating style clashes. Ship only the styles that are on the page for the best performance."
+                        'Write composable CSS that\'s co-located with your components for complete modularity. Unique generated class names keep the specificity low while eliminating style clashes. Ship only the styles that are on the page for the best performance.'
                     }
                 </p>
             </li>
