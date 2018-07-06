@@ -27,7 +27,7 @@ describe.only('<RepoListItem />', () => {
     });
 
     it('should render a ListItem', () => {
-        const renderedComponent = shallow(<RepoListItem item={item}/>);
+        const renderedComponent = shallow(<RepoListItem item={item} />);
         expect(renderedComponent.find(ListItem).length)
             .toBe(1);
     });

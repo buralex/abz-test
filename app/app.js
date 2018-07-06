@@ -53,7 +53,7 @@ const render = () => {
         <Provider store={store}>
             {/* <LanguageProvider messages={messages}> */}
             <ConnectedRouter history={history}>
-                <App/>
+                <App />
             </ConnectedRouter>
             {/* </LanguageProvider> */}
         </Provider>,

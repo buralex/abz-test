@@ -27,9 +27,13 @@ export default class RepoListItem extends React.PureComponent { // eslint-disabl
                 <a className="repo-list-item__repo-link" href={item.html_url} target="_blank" rel="noopener noreferrer">
                     {nameprefix + item.name}
                 </a>
-                <a className="repo-list-item__issue-link" href={`${item.html_url}/issues`} target="_blank"
-                   rel="noopener noreferrer">
-                    <IssueIcon className="repo-list-item__issue-icon"/>
+                <a
+                    className="repo-list-item__issue-link"
+                    href={`${item.html_url}/issues`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <IssueIcon className="repo-list-item__issue-icon" />
                     {item.open_issues_count}
                 </a>
             </div>
@@ -37,7 +41,7 @@ export default class RepoListItem extends React.PureComponent { // eslint-disabl
 
         // Render the content into a list item
         return (
-            <ListItem key={`repo-list-item-${item.full_name}`} item={content}/>
+            <ListItem key={`repo-list-item-${item.full_name}`} item={content} />
         );
     }
 }
