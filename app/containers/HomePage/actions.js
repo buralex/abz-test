@@ -15,7 +15,7 @@
  *    }
  */
 
-import restApi from 'utils/requestAxios';
+import restApi, {fetchCategories} from 'services/api';
 import { CHANGE_USERNAME } from './constants';
 
 /**
@@ -25,23 +25,7 @@ import { CHANGE_USERNAME } from './constants';
  *
  * @return {object}    An action object with a type of CHANGE_USERNAME
  */
-export async function changeUsername(name) {
-
-    console.log('ddddddd88888888888888888888888888888888888');
-    console.log(restApi);
-
-    const aaa = await restApi(`/services/categories`, {});
-
-    console.log(aaa);
-
-    // export const fetchShippersReceivers = async (params) => {
-    //     try {
-    //         return await restApi(`/services/categories`, {params});
-    //     } catch (e) {
-    //         return {error: e.statusText};
-    //     }
-    // };
-
+export function changeUsername(name) {
     return {
         type: CHANGE_USERNAME,
         name,

@@ -56,4 +56,15 @@ restApi.interceptors.request.use((config) => {
     return config;
 }, (error) => Promise.reject(error));
 
+axios.interceptors.response.use(function (response) {
+    // Do something with response data
+    return response;
+}, function (error) {
+    // Do something with response error
+    return Promise.reject(error);
+});
+
+export const fetchCategory = (id, params) => restApi(`/services/categories/${id}`, {params});
+export const fetchCategories = (params) => restApi(`/services/categories`, {params});
+
 export default restApi;
