@@ -28,6 +28,22 @@ const initialState = fromJS({
     },
 });
 
+const initialState111 = fromJS({
+    loading: false,
+    error: false,
+    currentUser: false,
+    userData: {
+        repositories: false,
+    },
+});
+
+console.log(initialState.get('loading'));
+console.log(initialState111.get('loading'));
+console.log(initialState.set('loading', 'dddddddsssss').get('loading'));
+console.log(initialState111.get('loading') === initialState.get('loading'));
+// console.log(initialState.set('loading', 'dddddddsssss').get('loading'));
+// console.log(initialState.get('loading'));
+
 function appReducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_REPOS:
