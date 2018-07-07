@@ -26,7 +26,7 @@ import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 /* eslint-enable import/no-webpack-loader-syntax */
 
 // Import CSS reset and Global Styles
-import 'styles/theme.scss';
+import 'styles';
 
 
 import configureStore from './configureStore';
@@ -34,10 +34,12 @@ import configureStore from './configureStore';
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
 const openSansObserver = new FontFaceObserver('Open Sans', {});
+//const openSansObserver = new FontFaceObserver('Proxima Nova', {});
 
 // When Open Sans is loaded, add a font-family using Open Sans to the body
 openSansObserver.load()
     .then(() => {
+        console.log('aaaffffffssssssssffffffffffssssssssss');
         document.body.classList.add('fontLoaded');
     }, () => {
         document.body.classList.remove('fontLoaded');
