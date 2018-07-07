@@ -7,7 +7,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
     render() {
         return (
             <div className="header">
-                <a href="">
+                <a href="/">
                     <img src={Logo} alt="Denteez logo" />
                 </a>
 

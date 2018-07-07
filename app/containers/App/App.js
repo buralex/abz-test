@@ -20,10 +20,10 @@ import './style.scss';
 const App = () => (
     <div className="app-wrapper">
         <Helmet
-            titleTemplate="%s - React.js Boilerplate"
-            defaultTitle="React.js Boilerplate"
+            titleTemplate="Denteez"
+            defaultTitle="Denteez"
         >
-            <meta name="description" content="A React.js Boilerplate application" />
+            <meta name="description" content="Denteez" />
         </Helmet>
         <Header />
         <Switch>

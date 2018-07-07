@@ -8,12 +8,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import ReposList from 'components/ReposList';
-import { Button } from 'reactstrap';
+
 import { Link } from 'react-router-dom';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import restApi, {fetchCategories, fetchCategory, fetchFriends} from 'services/api';
 import './style.scss';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: false
+        };
+
+        this.toggle = this.toggle.bind(this);
+    }
+
     /**
      * when initial state username is not null, submit the form to load repos
      */
@@ -21,6 +31,14 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         if (this.props.username && this.props.username.trim().length > 0) {
             this.props.onSubmitForm();
         }
+    }
+
+
+
+    toggle() {
+        this.setState({
+            modal: !this.state.modal
+        });
     }
 
     render() {
@@ -63,6 +81,21 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                             console.log(aaa);
 
                         }}>Danger!</Button>
+
+                        <Button color="danger" onClick={this.toggle}>mmmmmmm</Button>
+                        <div className="col-2 text-truncate">
+                            Praeterea iter est quasdam res quas ex communi.
+                        </div>
+                        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+                            <ModalBody>
+                                Lorem ud exercitation ullamco lab
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
+                                <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                            </ModalFooter>
+                        </Modal>
 
 
                     </section>
