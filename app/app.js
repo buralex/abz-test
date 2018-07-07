@@ -8,14 +8,12 @@
 // Needed for redux-saga es6 generator support
 import 'babel-polyfill';
 
-// Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import createHistory from 'history/createBrowserHistory';
-import 'sanitize.css/sanitize.css';
 
 // Import root app
 import App from 'containers/App';
@@ -26,24 +24,23 @@ import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 /* eslint-enable import/no-webpack-loader-syntax */
 
 // Import CSS reset and Global Styles
+import 'sanitize.css/sanitize.css';
 import 'styles';
 
 
 import configureStore from './configureStore';
 
-// Observe loading of Open Sans (to remove open sans, remove the <link> tag in
-// the index.html file and this observer)
-const openSansObserver = new FontFaceObserver('Open Sans', {});
-//const openSansObserver = new FontFaceObserver('Proxima Nova', {});
+/* ----------------------- check loading special fonts ------------------------------------------- */
+const proximaReg = new FontFaceObserver('Proxima Nova Reg');
+const proximaLight = new FontFaceObserver('Proxima Nova Light');
 
-// When Open Sans is loaded, add a font-family using Open Sans to the body
-openSansObserver.load()
-    .then(() => {
-        console.log('aaaffffffssssssssffffffffffssssssssss');
-        document.body.classList.add('fontLoaded');
-    }, () => {
-        document.body.classList.remove('fontLoaded');
-    });
+Promise.all([proximaReg.load(), proximaLight.load()]).then(() => {
+    document.body.classList.add('fontLoaded');
+}, () => {
+    document.body.classList.remove('fontLoaded');
+    console.error('some fonts not loaded');
+});
+/* ----------------------- check loading special fonts ------------------------------------------- */
 
 // Create redux store with history
 const initialState = {};

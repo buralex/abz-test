@@ -1,3 +1,6 @@
 
 @import 'variables';
-@import '~bootstrap/scss/bootstrap.scss';
+
+// import bootstrap after 'variables' - for customizing
+@import 'libs';
+
