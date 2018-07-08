@@ -6,10 +6,20 @@ import './style.scss';
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
     render() {
         return (
-            <div className="header">
-                <a href="/">
-                    <img src={Logo} alt="Denteez logo" />
-                </a>
+            <div className="header bg-success container-fluid outline-danger">
+                <div className="col-12 content outline-danger">
+                    <section className="logo">
+                        <a href="/"> <img src={Logo} alt="Denteez logo" /> </a>
+                    </section>
+
+                    <section className="search">
+                        <a href="/"> <img src={Logo} alt="Denteez logo" /> </a>
+                    </section>
+
+                    <section className="notifications">
+                        <a href="/"> <img src={Logo} alt="Denteez logo" /> </a>
+                    </section>
+                </div>
 
             </div>
         );

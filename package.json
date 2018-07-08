@@ -1,16 +1,16 @@
 {
-  "name": "react-redux-boilerplate",
+  "name": "abz-test",
   "version": "1.0.0",
-  "description": "A minimal react-redux boilerplate with all the best practices",
+  "description": "test-task,(as a boilerplate was taken - https://github.com/flexdinesh/react-redux-boilerplate)",
   "repository": {
     "type": "git",
-    "url": "git://github.com/flexdinesh/react-redux-boilerplate.git"
+    "url": "https://github.com/buralex/abz-test"
   },
   "engines": {
     "npm": ">=3",
     "node": ">=5"
   },
-  "author": "Dinesh Pandiyan",
+  "author": "Alexandr Burlachenko",
   "license": "MIT",
   "scripts": {
     "prebuild": "npm run build:clean",

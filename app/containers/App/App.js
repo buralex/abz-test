@@ -25,12 +25,17 @@ const App = () => (
         >
             <meta name="description" content="Denteez" />
         </Helmet>
+
         <Header />
-        <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/features" component={FeaturePage} />
-            <Route path="" component={NotFoundPage} />
-        </Switch>
+
+        <div className="container-fluid content">
+            <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route path="/features" component={FeaturePage} />
+                <Route path="" component={NotFoundPage} />
+            </Switch>
+        </div>
+
         <Footer />
     </div>
 );
