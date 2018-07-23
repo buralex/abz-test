@@ -1,14 +1,29 @@
-footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 3em 0;
-  border-top: 1px solid #666;
 
-  a {
-    color: #41addd;
+@import '../../styles/colors_and_variables';
 
-    &:hover {
-      color: #6cc0e5;
+.footer-component {
+
+  border-top: 1px solid $silver-three;
+  padding: 29px 15px 27px 15px;
+
+  .copy {
+    color: $cloudy-blue;
+    font-size: 12px;
+    margin-left: 65px;
+  }
+
+  .nav {
+    margin-right: 69px;
+
+    a {
+      color: $cloudy-blue;
+      font-size: 12px;
+      margin-left: 20px;
+    }
+
+    a:first-child {
+      margin-right: 9px;
     }
   }
+
 }

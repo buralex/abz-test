@@ -1,0 +1,50 @@
+
+@import '../../styles/colors_and_variables';
+
+.services-container {
+  padding-top: 12px;
+
+  h2 {
+    font-size: 30px;
+    line-height: 0.9;
+    margin-bottom: 25px;
+  }
+
+  .list-container {
+    border: 1px solid $silver-three;
+    border-radius: 5px;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    min-width: 486px;
+
+    .tile {
+      margin: 5px 6px;
+      width: 140px;
+      cursor: pointer;
+
+      .tile-icon {
+        width: 140px;
+        height: 140px;
+        border: 1px solid $silver-three;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      p {
+        font-size: 14px;
+        margin-bottom: 0;
+        line-height: 1.2;
+      }
+
+      &:hover {
+        color: $moss-green-two;
+        .tile-icon {
+          background-color: $pale-grey-two;
+        }
+      }
+    }
+  }
+}

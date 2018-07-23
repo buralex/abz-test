@@ -2,35 +2,40 @@
  * Combine all reducers in this file and export the combined reducers.
  */
 
-import { fromJS } from 'immutable';
-import { combineReducers } from 'redux-immutable';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import {combineReducers} from 'redux';
+import {LOCATION_CHANGE} from 'react-router-redux';
 
-import globalReducer from 'containers/App/reducer';
+import appReducer from 'containers/App/reducer';
+import userDataReducer from 'containers/App/userDataReducer';
+import userSettingsReducer from 'containers/App/userSettingsReducer';
+import { reducer as signalReducer } from 'redux-signal';
+import { reducer as reduxFormReducer } from 'redux-form';
+import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
 /*
  * routeReducer
  *
- * The reducer merges route location changes into our immutable state.
+ * The reducer merges route location changes into our state.
  * The change is necessitated by moving to react-router-redux@5
  *
  */
 
 // Initial routing state
-const routeInitialState = fromJS({
+const routeInitialState = {
     location: null,
-});
+};
 
 /**
  * Merge route into the global application state
  */
-function routeReducer(state = routeInitialState, action) {
+export function routeReducer(state = routeInitialState, action) {
     switch (action.type) {
         /* istanbul ignore next */
         case LOCATION_CHANGE:
-            return state.merge({
+            return {
+                ...state,
                 location: action.payload,
-            });
+            };
         default:
             return state;
     }
@@ -42,7 +47,13 @@ function routeReducer(state = routeInitialState, action) {
 export default function createReducer(injectedReducers) {
     return combineReducers({
         route: routeReducer,
-        global: globalReducer,
+        app: appReducer,
+        userData: userDataReducer,
+        userSettings: userSettingsReducer,
+
+        signal: signalReducer,
+        form: reduxFormReducer,
+        language: languageProviderReducer,
         ...injectedReducers,
     });
 }

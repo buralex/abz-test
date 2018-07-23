@@ -1,0 +1,119 @@
+
+
+//**************************************************************************
+//
+//                   Override bootstrap variables
+//
+//**************************************************************************
+
+
+//**************************
+//       Color system
+//**************************
+
+$theme-colors: (
+
+  //****** colors of project ******//
+        success: $success,
+        turtle-green-two: $turtle-green-two,
+        $light-green: $light-green,
+        moss-green: $moss-green,
+        darkest-blue: $darkest-blue,
+        faded-blue: $faded-blue,
+        moss-green-two: $moss-green-two,
+        steel: $steel,
+        silver: $silver,
+        silver-two: $silver-two,
+        silver-three: $silver-three,
+        cloudy-blue: $cloudy-blue,
+        pinkish-grey: $pinkish-grey,
+        white-two: $white-two,
+        white-three: $white-three,
+        white-four: $white-four,
+        pale-grey: $pale-grey,
+        pale-grey-two: $pale-grey-two,
+        white: $white,
+);
+
+//**************************
+//       / Color system
+//**************************
+
+
+//**************************
+//       Buttons
+//**************************
+
+$btn-focus-box-shadow: none !important;
+
+//**************************
+//       / Buttons
+//**************************
+
+
+//**************************************************************************
+//
+//                   / Override bootstrap variables
+//
+//**************************************************************************
+
+/*
+*
+* import bootstrap after 'variables' - for customizing
+*
+*/
+@import '~bootstrap/scss/bootstrap.scss';
+
+
+//**************************************************************************
+//
+//                   override bootstrap classes
+//
+//**************************************************************************
+
+//**************************
+//       Buttons
+//**************************
+
+[class*=btn-sm] {
+  padding: 0px 19px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+}
+
+.btn-success {
+  color: $white;
+
+  &.disabled {
+    color: $white;
+  }
+
+  &:hover {
+    background-color: lighten($success, 6);
+    border-color: lighten($success, 6);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+  &.btn-lg {
+    padding-top: 13px;
+    padding-bottom: 13px;
+
+    font-size: 16px;
+  }
+}
+
+//**************************
+//       / Buttons
+//**************************
+
+
+
+//**************************************************************************
+//
+//                   / override bootstrap classes
+//
+//**************************************************************************
+
+
+

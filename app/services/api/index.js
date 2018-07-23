@@ -1,71 +1,74 @@
-// import 'whatwg-fetch';
-//
-// /**
-//  * Parses the JSON returned by a network request
-//  *
-//  * @param  {object} response A response from a network request
-//  *
-//  * @return {object}          The parsed JSON from the request
-//  */
-// function parseJSON(response) {
-//     if (response.status === 204 || response.status === 205) {
-//         return null;
-//     }
-//     return response.json();
-// }
-//
-// /**
-//  * Checks if a network request came back fine, and throws an error if not
-//  *
-//  * @param  {object} response   A response from a network request
-//  *
-//  * @return {object|undefined} Returns either the response, or throws an error
-//  */
-// function checkStatus(response) {
-//     if (response.status >= 200 && response.status < 300) {
-//         return response;
-//     }
-//
-//     const error = new Error(response.statusText);
-//     error.response = response;
-//     throw error;
-// }
-
-// /**
-//  * Requests a URL, returning a promise
-//  *
-//  * @param  {string} url       The URL we want to request
-//  * @param  {object} [options] The options we want to pass to "fetch"
-//  *
-//  * @return {object}           The response data
-//  */
-// export default function request(url, options) {
-//     return fetch(url, options)
-//         .then(checkStatus)
-//         .then(parseJSON);
-// }
 
 import axios from 'axios';
+import * as appActions from 'containers/App/actions';
 
 const restApi = axios.create({
-    baseURL: 'http://504080.com/api/v1',
+    baseURL: '//504080.com/api/v1',
 });
 
 restApi.interceptors.request.use((config) => {
-    config.headers.Authorization = `963be28b713448ddd1660b5f8eed91b45ffcfe48`;
+    // eslint-disable-next-line
+    const authKey = window.__global_store__.getState().userData.authKey;
+    // eslint-disable-next-line
+    config.headers.Authorization = `${authKey}` || `1f9d364c9d2e6b3383b6b684b66e2047d7ef9ea2`;
     return config;
 }, (error) => Promise.reject(error));
 
-// axios.interceptors.response.use((response) => {
-//     // Do something with response data
-//     return response;
-// }, (error) => {
-//     // Do something with response error
-//     return Promise.reject(error);
-// });
+restApi.interceptors.response.use((response) => response, (error) => {
+    // eslint-disable-next-line
+    const isUserLoggedIn = window.__global_store__.getState().userData.authKey;
+    if (error.response && error.response.status === 401 && isUserLoggedIn) {
+        console.warn('unauthorized, logging out ...');
+        // eslint-disable-next-line
+        window.__global_store__.dispatch(appActions.logout());
+    }
+    return Promise.reject(error.response);
+});
 
+
+/*------------------------------------
+          api common functions
+---------------------------------------*/
 export const fetchCategory = (id, params) => restApi(`/services/categories/${id}`, {params});
 export const fetchCategories = (params) => restApi(`/services/categories`, {params});
-export const fetchFriends = (params) => restApi(`/suggestions/friends`, {params});
+export const fetchSuggestedFriends = (params) => restApi(`/suggestions/friends`, {params});
+export const fetchSuggestedCompanies = (params) => restApi(`/suggestions/companies`, {params});
+//export const fetchSuggestedCompanies = (params) => restApi(`/services/categories/121212112`, {params});
+export const fetchSuggestedProducts = (params) => restApi(`/suggestions/products`, {params});
+
+
+export const fetchEnquiryTypes = (params) => restApi(`/directories/enquiry-types`, {params});
+
+// export const fetchEnquiryTypes = (params) => {
+//      //delay(3000);
+//     return new Promise(resolve => {
+//
+//         window.setTimeout(() => {
+//             const fakeNumber = 1234567890;
+//             // dispatch({
+//             //     type: actionTypes.LOAD_NUMBER_RESERVED,
+//             //     payload: fakeNumber,
+//             // });
+//             resolve({data: fakeNumber});
+//         }, 3000);
+//     });
+//     //restApi(`/directories/1`, {params})
+// };
+
+export const postToSupport = (data) => {
+    const formData = new FormData();
+
+    Object.keys(data).forEach(( key ) => {
+        formData.append(key, data[ key ]);
+    });
+
+    return restApi.post(`/support`, formData, {headers: {'Content-Type': 'multipart/form-data'}});
+};
+
+
+export const loginRequest = (params) => restApi.post(`/account/login`, {...params});
+/*------------------------------------
+          / api common functions
+---------------------------------------*/
 
 export default restApi;

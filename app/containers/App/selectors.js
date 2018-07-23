@@ -1,44 +1,29 @@
 /**
- * The global state selectors
+ * The app state selectors
  */
 
-import { createSelector } from 'reselect';
+import {createSelector} from 'reselect';
 
-const selectGlobal = (state) => state.get('global');
+export const selectApp = state => state.app;
+export const selectRoute = state => state.route;
+export const selectUserData = state => state.userData;
+export const selectRouteParams = (state, ownProps) => ownProps.match.params;
 
-const selectRoute = (state) => state.get('route');
+export const makeSelectCurrentUser = () => createSelector(selectApp, app => app.userData.user);
 
-const makeSelectCurrentUser = () => createSelector(
-    selectGlobal,
-    (globalState) => globalState.get('currentUser'),
-);
+export const makeSelectLoading = () => createSelector(selectApp, app => app.loading);
 
-const makeSelectLoading = () => createSelector(
-    selectGlobal,
-    (globalState) => globalState.get('loading'),
-);
+export const makeSelectAlert = () => createSelector(selectApp, app => app.alert);
+export const makeSelectSuggestions = () => createSelector(selectApp, app => app.suggestions);
 
-const makeSelectError = () => createSelector(
-    selectGlobal,
-    (globalState) => globalState.get('error'),
-);
+export const makeSelectAction = () => createSelector(selectRouteParams, params => params.action);
 
-const makeSelectRepos = () => createSelector(
-    selectGlobal,
-    (globalState) => globalState.getIn(['userData', 'repositories']),
-);
+export const makeSelectIsLoggedIn = () => createSelector(selectUserData, userData => userData.authKey !== null);
+export const makeSelectUser = () => createSelector(selectUserData, userData => userData.user);
 
-const makeSelectLocation = () => createSelector(
-    selectRoute,
-    (routeState) => routeState.get('location')
-        .toJS(),
-);
+export const makeSelectLocation = () => createSelector(selectRoute, routeState => routeState.location);
 
-export {
-    selectGlobal,
-    makeSelectCurrentUser,
-    makeSelectLoading,
-    makeSelectError,
-    makeSelectRepos,
-    makeSelectLocation,
-};
+
+export const makeSelectIsLogin = () =>
+    createSelector(selectRoute, routeState => routeState.location.pathname.includes('login'));
+
