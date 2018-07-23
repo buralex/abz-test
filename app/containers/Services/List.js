@@ -11,6 +11,8 @@ import restApi, {fetchCategories, fetchCategory, fetchFriends} from 'services/ap
 
 import defaultCategory from 'images/no-service-category-icon.png';
 
+import LoadingBeat from 'components/LoadingBeat';
+
 import {
     makeSelectLoading,
 } from 'containers/App/selectors';
@@ -28,15 +30,6 @@ import {makeSelectCategories} from './selectors';
 
 
 class List extends React.PureComponent {
-    constructor(props) {
-        super(props);
-
-    }
-
-    componentDidUpdate(prevProps) {
-
-    }
-
 
     render() {
         const {loading, categories} = this.props;
@@ -49,6 +42,10 @@ class List extends React.PureComponent {
                 </div>
 
                 <div className="list-container">
+                    <div className="absolute-left w-100">
+                        <LoadingBeat loading={loading} />
+                    </div>
+
                     {categories.map((cat, i) => {
 
                         if (i < 20) {
@@ -68,6 +65,7 @@ class List extends React.PureComponent {
 
 
                     })}
+
                 </div>
             </div>
         );

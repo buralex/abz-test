@@ -1,6 +1,6 @@
 
 import React from 'react'
-import {FIELDS as db} from '../constants/fields';
+import {FIELDS as db} from './constants/fields';
 
 const fileTypesForChat = [
     'image/jpeg',
@@ -47,7 +47,9 @@ export default values => {
         const fileSize = Number((file.size / 1024 / 1024).toFixed(1));
         const fileType = file.type;
 
-        if (fileSize > 5) {
+        if (file.error) {
+            errors[db.file] = file.error;
+        } else if (fileSize > 5) {
             errors[db.file] = `Max file size is 5 MB (your file is ${fileSize} MB)`;
         } else if (!fileTypesForChat.includes(fileType)) {
             errors[db.file] = 'This file extension is not allowed!';

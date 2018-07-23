@@ -1,7 +1,7 @@
 import React from 'react';
 import {compose} from "redux";
 import {withSignal} from "redux-signal";
-
+import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {createStructuredSelector} from "reselect";
 
@@ -39,16 +39,17 @@ class NavBar extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        this.toggle = this.toggle.bind(this);
         this.state = {
-            tooltipOpen: false,
+            topMenuOpen: false,
         };
     }
-    toggle() {
+
+    toggle = () => {
         this.setState({
-            tooltipOpen: !this.state.tooltipOpen
+            topMenuOpen: !this.state.topMenuOpen,
         });
     }
+
     render() {
 
         const {user} = this.props;
@@ -112,7 +113,14 @@ class NavBar extends React.PureComponent {
 
                             </UncontrolledTooltip>
                         </div>
-                        <div id="avatarArea" onClick={this.toggle} className="avatar text-nowrap text-truncate" >
+                        <div
+                            role="button"
+                            onKeyDown={() => {}}
+                            onMouseEnter={this.toggle}
+                            onMouseLeave={this.toggle}
+                            tabIndex={0}
+                            className="avatar text-nowrap"
+                        >
                             <button className="avatar-btn">
                                 <img src={avatar} width="32" height="32" alt="user avatar" />
                             </button>
@@ -123,16 +131,11 @@ class NavBar extends React.PureComponent {
                                 </span>
                             }
 
-                            <Tooltip
-                                className="top-navbar-menu"
-                                isOpen={this.state.tooltipOpen}
-                                autohide={false}
-                                placement="bottom"
-                                target="avatarArea"
-                            >
+                            {this.state.topMenuOpen &&
+                            <div className="top-navbar-menu">
                                 <ul className="navbar">
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#">Link1</a>
+                                        <Link className="nav-link" to="/support">Support</Link>
                                     </li>
                                     <li className="nav-item">
                                         <a
@@ -146,8 +149,9 @@ class NavBar extends React.PureComponent {
                                         </a>
                                     </li>
                                 </ul>
+                            </div>
+                            }
 
-                            </Tooltip>
                         </div>
                     </section>
                 </div>

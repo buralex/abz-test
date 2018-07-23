@@ -2,20 +2,18 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 
-import TextInput from 'components/Form/TextInput';
-import TextArea from 'components/Form/TextArea';
-import Select from 'components/Form/Select';
-import FileUpload from 'components/Form/FileUpload';
-import LoadingBeat from 'components/LoadingBeat';
+import TextInput from 'components/Form/TextInput/index';
+import TextArea from 'components/Form/TextArea/index';
+import Select from 'components/Form/Select/index';
+import FileUpload from 'components/Form/FileUpload/index';
+import LoadingBeat from 'components/LoadingBeat/index';
 
 import {
     Button,
-    Modal, ModalHeader, ModalBody, ModalFooter,
-    Tooltip, UncontrolledTooltip
 } from 'reactstrap';
 
 
-import {FIELDS as db} from '../constants/fields';
+import {FIELDS as db} from './constants/fields';
 import validate from './validation';
 
 

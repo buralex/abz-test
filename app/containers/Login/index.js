@@ -13,10 +13,16 @@ import withData from "hocs/withData";
 import { history } from 'app';
 
 
-import {makeSelectIsLoggedIn, makeSelectLoading, makeSelectLocation} from 'containers/App/selectors';
+import {
+    makeSelectIsLoggedIn,
+    makeSelectLoading,
+    makeSelectLocation,
+    makeSelectCurrentEnqType,
+    makeSelectEnquiryTypes,
+} from 'containers/App/selectors';
 
-import injectReducer from 'utils/injectReducer';
-import injectSaga from 'utils/injectSaga';
+
+import SupportForm from "components/SupportForm/index";
 
 import {
     withSignal,
@@ -24,13 +30,7 @@ import {
 
 import * as modalNames from 'components/modals/names';
 import * as appActions from "containers/App/actions";
-import * as actions from './actions';
-import {makeSelectEnquiryTypes, makeSelectCurrentEnqType} from './selectors';
 
-import reducer from './reducer';
-import saga from './saga';
-
-import SupportForm from "./components/SupportForm";
 
 import LoginForm from "./components/LoginForm";
 
@@ -43,7 +43,7 @@ class Login extends React.PureComponent {
         super(props);
 
         this.initValues = {
-            enquiry_type: 'Other',
+            // enquiry_type: 'Other',
         };
 
         if (props.location.pathname === '/') {
@@ -139,13 +139,13 @@ Login.propTypes = {
 
 
 export const mapDispatchToProps = (dispatch) => ({
-    postEnquiry: (values) => dispatch(actions.postEnquiry(values)),
+    postEnquiry: (values) => dispatch(appActions.postEnquiry(values)),
     login: (values) => dispatch(appActions.login(values)),
     showAlert: (modalName, data) => dispatch(appActions.showAlert(modalName, data)),
 
     /* -------------------- withData hoc ---------------------------------- */
     getData: () => {
-        dispatch(actions.loadEnquiryTypes());
+        dispatch(appActions.loadEnquiryTypes());
     },
     // clearState: () => dispatch(actions.clearClientState()),
     /* -------------------- withData hoc ---------------------------------- */
@@ -165,12 +165,12 @@ const withConnect = connect(
     mapDispatchToProps,
 );
 
-const withReducer = injectReducer({key: 'login', reducer});
-const withSaga = injectSaga({key: 'login', saga});
+// const withReducer = injectReducer({key: 'login', reducer});
+// const withSaga = injectSaga({key: 'login', saga});
 
 export default compose(
-    withReducer,
-    withSaga,
+    // withReducer,
+    // withSaga,
     withSignal,
     withConnect,
 )(withData(Login));
